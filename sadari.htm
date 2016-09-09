@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>==========간단 사다리==========</p>
+
+<p id="demo"></p>
+<p id="demo2"></p>
+
+<script>
+var result = "";
+var result2 = "";
+var money = new Array(5000,5000,5000,3000,3000,3000,1000,1000,1000);
+var moneyCheck = [0,0,0,0,0,0,0,0,0];
+var pointCheck = 0;
+var pointNow = 0;
+
+for (var idx in money){ 
+ var pointCheck = 0;
+ var pointNow = 0;
+ while(pointCheck == 0){
+   pointNow = Math.floor(Math.random() * 10);
+   if(moneyCheck[pointNow] == 0){
+     moneyCheck[pointNow] = 1;
+     pointCheck = 1;
+   }
+ }
+ result = result + "<br>" + (Number(idx) + 1) + " : " + money[pointNow];
+ pointNow = 0;
+}
+myFunction();
+
+function myFunction() {
+    document.getElementById("demo").innerHTML =
+    "사다리 결과" + result;
+}
+</script>
+
+</body>
+</html>
+
+
+
