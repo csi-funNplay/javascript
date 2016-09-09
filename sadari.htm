@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<p>==========간단 사다리==========</p>
-
+Number of members : <input type="text" id="member" name="member" value="" size="10">
+<button id="btnNoOfMember" onclick="appendFields()">set members!</button><br />
+<div id="container"></div>
+<p>==========SADARI Good Luck!==========</p>
+<button id="btnGo">Go!</button>
 <p id="demo"></p>
-<p id="demo2"></p>
 
 <script>
-var result = "";
-var result2 = "";
-var money = new Array(5000,5000,5000,3000,3000,3000,1000,1000,1000);
-var moneyCheck = [0,0,0,0,0,0,0,0,0];
-var pointCheck = 0;
-var pointNow = 0;
 
-for (var idx in money){ 
- var pointCheck = 0;
- var pointNow = 0;
- while(pointCheck == 0){
-   pointNow = Math.floor(Math.random() * 10);
-   if(moneyCheck[pointNow] == 0){
-     moneyCheck[pointNow] = 1;
-     pointCheck = 1;
-   }
- }
- result = result + "<br>" + (Number(idx) + 1) + " : " + money[pointNow];
- pointNow = 0;
+function appendFields(){
+    var number = document.getElementById("member").value;
+    var container = document.getElementById("container");
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+    for (var i=0;i<number;i++){
+        container.appendChild(document.createTextNode("member" + (i+1) + " : "));
+        var input = document.createElement("input");
+        input.type = "text";
+        input.id = "member"+i;
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+    }
 }
-myFunction();
+
+document.getElementById("btnGo").onclick = function(){myFunction()};
 
 function myFunction() {
-    document.getElementById("demo").innerHTML =
-    "사다리 결과" + result;
+    var result = "";
+    var result2 = "";
+    var money = new Array();
+    var moneyCheck = new Array();
+    var memberNo = document.getElementById("member").value;    
+    for(var i=0; i<memberNo; i++){        
+        money.push(document.getElementById("member"+i).value);
+        moneyCheck.push(0);
+    }
+    var pointCheck = 0;
+    var pointNow = 0;
+    for (var idx in money){ 
+        var pointCheck = 0;
+        var pointNow = 0;
+        while(pointCheck == 0){
+            pointNow = Math.floor(Math.random() * 10);
+            if(moneyCheck[pointNow] == 0){
+                moneyCheck[pointNow] = 1;
+                pointCheck = 1;
+            }
+        }
+        result = result + "<br>" + (Number(idx) + 1) + " ------------------------------ " + money[pointNow];
+        pointNow = 0;
+    }
+    document.getElementById("demo").innerHTML = "[ SADARI RESULT ]" + result;
 }
 </script>
 
 </body>
 </html>
-
-
-
